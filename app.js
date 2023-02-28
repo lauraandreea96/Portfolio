@@ -18,7 +18,7 @@ document.addEventListener("mousemove", (e)=>{
             
                 item.style.transform = `translateY(${positionY - 7}px) translateX(${positionX - 24}px)`;
         })
-    }
+    } 
 })
 
 //header moving on scroll
@@ -150,40 +150,50 @@ sliders.forEach(slider => {
 
 
 //scroll horizontal
-const bigcontainer = document.querySelector(".sticky-wrapper");
-const sections = gsap.utils.toArray(".sticky-wrapper .bigContainer");
+var x = window.matchMedia("(min-width: 801px)")
+function myFunction(x) {
+    if (x.matches) { // If media query matches
+        const bigcontainer = document.querySelector(".sticky-wrapper");
+        const sections = gsap.utils.toArray(".sticky-wrapper .bigContainer");
+        
+        
+        let scrollTrigger = gsap.to(sections, {
+          xPercent: -100 * (sections.length - 1),
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".sticky-wrapper",
+            pin: true,
+            scrub: 1,
+            end: "+=3000",
+            // snap: 1 / (sections.length - 1),
+            // markers: true,
+          }
+        });
+        
+        const bigcontainer2 = document.querySelector(".sticky-wrapper2");
+        const sections2 = gsap.utils.toArray(".sticky-wrapper2 .bigContainer2");
+        
+        let scrollTrigger2 = gsap.to(sections2, {
+          xPercent: -100 * (sections2.length - 1),
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".sticky-wrapper2",
+            pin: true,
+            scrub: 1,
+            end: "+=3000",
+            // snap: 1 / (sections2.length - 1),
+            // markers: true,
+          }
+        }); 
+    }
+}
+
+x.addEventListener('change', myFunction);
+myFunction(x);
 
 
-let scrollTrigger = gsap.to(sections, {
-  xPercent: -100 * (sections.length - 1),
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".sticky-wrapper",
-    pin: true,
-    scrub: 1,
-    end: "+=3000",
-    // snap: 1 / (sections.length - 1),
-    // markers: true,
-  }
-});
 
 
-
-const bigcontainer2 = document.querySelector(".sticky-wrapper2");
-const sections2 = gsap.utils.toArray(".sticky-wrapper2 .bigContainer2");
-
-let scrollTrigger2 = gsap.to(sections2, {
-  xPercent: -100 * (sections2.length - 1),
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".sticky-wrapper2",
-    pin: true,
-    scrub: 1,
-    end: "+=3000",
-    // snap: 1 / (sections2.length - 1),
-    // markers: true,
-  }
-});
 
 
 

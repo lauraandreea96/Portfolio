@@ -84,6 +84,11 @@ li{
     padding-bottom: 0.5rem;
     list-style-position: inside;
 }
+
+a{
+    text-decoration: none;
+}
+
 /* header */
 
 .header{
@@ -439,6 +444,7 @@ cursor: pointer;
 .contact-details p{
     font-weight: 600;
     color: #4F99A3;
+    font-size: 0.8rem;
 }
 
 .left-resume h3{
@@ -489,6 +495,8 @@ cursor: pointer;
         font-size: 1.1rem;
     }
 
+    /* header */
+
     .header h1{
         font-size: 5rem;
     }
@@ -504,6 +512,8 @@ cursor: pointer;
     top: calc(100% - 150px);
     left: calc(50% - 96px);
     }
+
+    /* skills */
 
     .right{
         width: 100%;
@@ -522,12 +532,13 @@ cursor: pointer;
     }
 
     .title{
-        top: 6em;
-        left: 10vw;
+        position: relative;
+        left: 0;
+        align-self: flex-start;
     }
 
     .title span{
-        font-size: 4rem;
+        font-size: 5rem;
         padding: 2rem 1rem;
     }
 
@@ -554,6 +565,17 @@ cursor: pointer;
 
     .details{
         width: 70%;
+    }
+
+    /* horizontal scroll */
+
+    .sticky-wrapper, .sticky-wrapper2{
+        width: 100vw;
+        flex-direction: column;
+    }
+    
+    .bigContainer, .bigContainer2{
+        height: max-content;
     }
 
     .about-img{
@@ -588,6 +610,11 @@ cursor: pointer;
     .technical-skills ul li{
         width: 100%;
       }
+
+    .title span{
+    font-size: 3rem;
+    padding: 2rem 1rem;
+    }
   }
 
 
