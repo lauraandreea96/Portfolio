@@ -185,64 +185,58 @@ function myFunction(x) {
             // markers: true,
           }
         }); 
+
+        // whizz around the sections
+        sections.forEach((section) => {
+            // grab the scoped text
+            let text = section.querySelectorAll(".anim");
+            
+            // bump out if there's no items to animate
+            if(text.length === 0)  return 
+            
+            // do a little stagger
+            gsap.from(text, {
+            y: -130,
+            opacity: 0,
+            duration: 2,
+            ease: "elastic",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: section,
+                containerAnimation: scrollTrigger,
+                start: "left center",
+                // markers: true
+            }
+            });
+        });
+
+        sections2.forEach((section) => {
+            // grab the scoped text
+            let text = section.querySelectorAll(".anim");
+            
+            // bump out if there's no items to animate
+            if(text.length === 0)  return 
+            
+            // do a little stagger
+            gsap.from(text, {
+            y: -130,
+            opacity: 0,
+            duration: 2,
+            ease: "elastic",
+            stagger: 0.1,
+            scrollTrigger: {
+                trigger: section,
+                containerAnimation: scrollTrigger2,
+                start: "left center",
+                // markers: true
+            }
+            });
+        });
     }
 }
 
 x.addEventListener('change', myFunction);
 myFunction(x);
-
-
-
-
-
-
-
-// whizz around the sections
-sections.forEach((section) => {
-    // grab the scoped text
-    let text = section.querySelectorAll(".anim");
-    
-    // bump out if there's no items to animate
-    if(text.length === 0)  return 
-    
-    // do a little stagger
-    gsap.from(text, {
-      y: -130,
-      opacity: 0,
-      duration: 2,
-      ease: "elastic",
-      stagger: 0.1,
-      scrollTrigger: {
-        trigger: section,
-        containerAnimation: scrollTrigger,
-        start: "left center",
-        // markers: true
-      }
-    });
-  });
-
-  sections2.forEach((section) => {
-    // grab the scoped text
-    let text = section.querySelectorAll(".anim");
-    
-    // bump out if there's no items to animate
-    if(text.length === 0)  return 
-    
-    // do a little stagger
-    gsap.from(text, {
-      y: -130,
-      opacity: 0,
-      duration: 2,
-      ease: "elastic",
-      stagger: 0.1,
-      scrollTrigger: {
-        trigger: section,
-        containerAnimation: scrollTrigger2,
-        start: "left center",
-        // markers: true
-      }
-    });
-  });
 
 
 //projects detail modal
