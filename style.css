@@ -9,20 +9,14 @@
 body{
     width: 100vw;
     overflow-x: hidden;
-    position: relative;
+    box-sizing: border-box;
 }
 
 .container{
     margin: auto;
     max-width: 1200px;
-    /* padding-left: 4rem;
-    padding-right: 4rem; */
     padding: 6rem 4rem;
 }
-
-/* section{
-    padding: 6rem 0;
-} */
 
 .flexContainer{
     display: flex;
@@ -87,6 +81,7 @@ li{
 
 a{
     text-decoration: none;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* header */
@@ -231,6 +226,7 @@ a{
     width: 100%;
     flex-direction: column;
     position: relative;
+    overflow-x: hidden;
 }
 
 .left{
@@ -298,7 +294,7 @@ a{
 
 .imgItem{
     width: 50%;
-    padding: 10px;
+    padding: 1.25rem;
 }
 
 .textItem{
@@ -327,13 +323,25 @@ a{
     color: #D8D4FE;
 }
 
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.github-link{
+    text-decoration: underline;
+    color: #000;
+    font-weight: 300;
+}
+
 /* modal */
 
 .modal {
     display: none; 
     position: fixed; 
     z-index: 99; 
-    padding-top: 100px; 
+    padding-top: 6.25rem; 
     left: 0;
     top: 0;
     width: 100%; 
@@ -346,14 +354,17 @@ a{
 .modal-container {
 background-color: #fefefe;
 margin: auto;
-padding: 20px;
+padding: 1.25rem;
 border: 1px solid #888;
 width: 90%;
+position: relative;
 }
 
 .close {
     color: #000;
-    float: right;
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
     font-size: 28px;
     font-weight: bold;
     z-index: 2;
@@ -372,37 +383,34 @@ cursor: pointer;
 
 .fullImg img{
     width: 100%;
-    padding: 10px;
+    padding: 0.6rem;
+}
+
+.vid{
+    margin-top: 4rem;
 }
 
 /* about section */
-.about{
-    align-items: center;
-    width: 100%;
-    position: relative;
-    margin-bottom: 4rem;
-    display: flex;
-    justify-content: space-between;
-}
 
-.about-img{
-    width: 20vw;
+   .about{
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3)),url("/images/background-01.png") center no-repeat;
+    height: 500px; 
+    background-size: cover;
+    display: flex;
+    align-items: center;
 }
 
 .details{
     text-align: center;
-    max-width: 500px;
     margin: auto;
+    background-color: #fff;
+    width: 100%;
 }
 
-.details button{
-    padding: 1rem 2rem;
-    border: none;
-    background-color: #EF7573;
-    color: #fff;
-    font-weight: 600;
-    margin: 1rem;
-    cursor: pointer;
+.details p{
+    max-width: 500px;
+    margin: auto;
+    margin-bottom: 1rem;
 }
 
 /* --------cv page-------- */
@@ -471,6 +479,15 @@ cursor: pointer;
     color: #4F99A3;
 }
 
+@media only screen and (max-width: 1200px){
+    .static{
+        height: 150px;
+        position: absolute;
+        top: calc(100% - 150px);
+        left: calc(50% - 96px);
+        }
+}
+
 
 
 
@@ -495,6 +512,13 @@ cursor: pointer;
         font-size: 1.1rem;
     }
 
+    /* modal */
+
+    .modal-container .container{
+        padding: 0;
+        padding-top: 2rem;
+    }
+
     /* header */
 
     .header h1{
@@ -504,23 +528,18 @@ cursor: pointer;
     .bird{
         width: 20vw;
     }
-    
-
-   .static{
-    height: 150px;
-    position: absolute;
-    top: calc(100% - 150px);
-    left: calc(50% - 96px);
-    }
 
     /* skills */
 
-    .right{
+    .left, .right {
+        transform: translateX(0);
+        transform: translateY(30%);
         width: 100%;
-        align-self: flex-start;
     }
-    .left{
-        width: 100%;
+
+    .left.appear,
+    .right.appear {
+    transform: translateY(0);
     }
 
     .skills{
@@ -544,10 +563,12 @@ cursor: pointer;
 
     .imgItem{
         width: 100%;
+        padding: 10px 0px;
     }
 
     .textItem{
         width: 100%;
+        font-size: 0.8rem;
     }
 
     .leftImg, .rightImg{
@@ -563,14 +584,11 @@ cursor: pointer;
         width: 5vw;
     }
 
-    .details{
-        width: 70%;
-    }
 
     /* horizontal scroll */
 
     .sticky-wrapper, .sticky-wrapper2{
-        width: 100vw;
+        width: 100%;
         flex-direction: column;
     }
     
@@ -578,9 +596,10 @@ cursor: pointer;
         height: max-content;
     }
 
-    .about-img{
-        width: 25vw;
-        /* position: absolute; */
+    /* cv-link */
+
+    .details{
+        margin: 0 1rem;
     }
 
     /*------------ cv page --------------*/

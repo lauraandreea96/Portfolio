@@ -2,7 +2,7 @@
 document.addEventListener("mousemove", (e)=>{
     let x = e.pageX;
     let y = e.pageY;
-    if(window.pageYOffset <= window.innerHeight){
+    if(window.pageYOffset <= window.innerHeight && window.innerWidth > 800){
         document.querySelectorAll(".object").forEach((item)=>{
             let speed = item.getAttribute("data-speed");
             let positionX = (window.innerWidth - x * speed) / 100;
@@ -21,7 +21,7 @@ document.addEventListener("mousemove", (e)=>{
     } 
 })
 
-//header moving on scroll
+//header move/scale elements on scroll
 gsap.to(".leftImg", {
     scrollTrigger: {
         scrub: 1,
@@ -50,12 +50,9 @@ gsap.to(".text", {
 
 
 // falling petals
-
-
 let endPath = document.querySelector("#path").getBoundingClientRect().bottom;
 let fallEnd = document.querySelector(".fallEnd").getBoundingClientRect().top;
 let petalaPosition = document.querySelector(".petala2").getBoundingClientRect().top;
-
 
 //dissapear falling after finish the path
   window.addEventListener('scroll', function() {
@@ -115,13 +112,9 @@ const textLoad = () => {
     }, 4000);
     setTimeout(textLoad, 8000);
 }
-
 textLoad();
 
-
-
 //scroll home about items into view
-
 const sliders = document.querySelectorAll(".slide-in");
 
 const appearOptions = {
@@ -142,20 +135,18 @@ const appearOnScroll = new IntersectionObserver(function(
         }
     })
 }, appearOptions);
+    sliders.forEach(slider => {
+        appearOnScroll.observe(slider);
+    });
 
-sliders.forEach(slider => {
-    appearOnScroll.observe(slider);
-});
-
-
-
-//scroll horizontal
+//scroll projects horizontal
 var x = window.matchMedia("(min-width: 801px)")
 function myFunction(x) {
-    if (x.matches) { // If media query matches
+    if (x.matches) {
         const bigcontainer = document.querySelector(".sticky-wrapper");
         const sections = gsap.utils.toArray(".sticky-wrapper .bigContainer");
-        
+        const bigcontainer2 = document.querySelector(".sticky-wrapper2");
+        const sections2 = gsap.utils.toArray(".sticky-wrapper2 .bigContainer2");
         
         let scrollTrigger = gsap.to(sections, {
           xPercent: -100 * (sections.length - 1),
@@ -165,13 +156,8 @@ function myFunction(x) {
             pin: true,
             scrub: 1,
             end: "+=3000",
-            // snap: 1 / (sections.length - 1),
-            // markers: true,
           }
         });
-        
-        const bigcontainer2 = document.querySelector(".sticky-wrapper2");
-        const sections2 = gsap.utils.toArray(".sticky-wrapper2 .bigContainer2");
         
         let scrollTrigger2 = gsap.to(sections2, {
           xPercent: -100 * (sections2.length - 1),
@@ -181,20 +167,12 @@ function myFunction(x) {
             pin: true,
             scrub: 1,
             end: "+=3000",
-            // snap: 1 / (sections2.length - 1),
-            // markers: true,
           }
         }); 
-
-        // whizz around the sections
+       
         sections.forEach((section) => {
-            // grab the scoped text
             let text = section.querySelectorAll(".anim");
-            
-            // bump out if there's no items to animate
             if(text.length === 0)  return 
-            
-            // do a little stagger
             gsap.from(text, {
             y: -130,
             opacity: 0,
@@ -205,19 +183,12 @@ function myFunction(x) {
                 trigger: section,
                 containerAnimation: scrollTrigger,
                 start: "left center",
-                // markers: true
             }
             });
         });
-
         sections2.forEach((section) => {
-            // grab the scoped text
             let text = section.querySelectorAll(".anim");
-            
-            // bump out if there's no items to animate
             if(text.length === 0)  return 
-            
-            // do a little stagger
             gsap.from(text, {
             y: -130,
             opacity: 0,
@@ -228,54 +199,69 @@ function myFunction(x) {
                 trigger: section,
                 containerAnimation: scrollTrigger2,
                 start: "left center",
-                // markers: true
             }
             });
         });
     }
 }
-
 x.addEventListener('change', myFunction);
 myFunction(x);
 
-
 //projects detail modal
-
 var modal = document.getElementById("myModal");
-
 const modalContent = document.querySelector(".modal-content");
-
-// Get the button that opens the modal
 var btn = document.querySelector(".button");
-
-// Get the <span> element that closes the modal
 var span = document.querySelector(".close");
 
-// When the user clicks the button, open the modal 
 document.onclick = function(e) {
     if(e.target.classList.contains('button')){
         modal.style.display = "block";
-        let data = designProjects.find(item => item.id == e.target.classList[1])
-        let project = `
-            <div class="container">
-                <div class="flexContainer">
-                    <p class="textItem">${data.desc}</p>
-                    <img src="${data.photos[0]}" class="imgItem" alt="">
+        let data;
+        if(e.target.classList.contains('design')){
+            data = designProjects.find(item => item.id == e.target.classList[1])
+            let project = `
+                <div class="container">
+                    <div class="flexContainer">
+                        <img src="${data.photos[4]}" class="imgItem" alt="">
+                        <img src="${data.photos[0]}" class="imgItem" alt="">
+                    </div>
+                    <div class="flexContainer">
+                        <img src="${data.photos[1]}" class="imgItem" alt="">
+                        <img src="${data.photos[2]}" class="imgItem" alt="">
+                    </div>
+                    <div class="fullImg">
+                        <img src="${data.photos[3]}" alt="">
+                    </div>
                 </div>
-                <div class="flexContainer">
-                    <img src="${data.photos[1]}" class="imgItem" alt="">
-                    <img src="${data.photos[2]}" class="imgItem" alt="">
+            `
+            modalContent.insertAdjacentHTML("beforeend", project);
+        }else if(e.target.classList.contains('frontend')){
+            data = frontendProjects.find(item => item.id == e.target.classList[1])
+            let project = `
+                <div class="container">
+                    <div class="flexContainer">
+                        <div class="textItem">
+                            <h2> ${data.name}</h2>
+                            <p>${data.desc}</p>
+                        </div>
+                        <img src="${data.photos[0]}" class="imgItem" alt="">
+                    </div>
+                    <video controls class="fullImg vid"> 
+                        <source src="${data.photos[1]}" type=video/mp4>
+                    </video>
+                    <video controls class="fullImg vid"> 
+                        <source src="${data.photos[2]}" type=video/mp4>
+                    </video>
+                    <video controls class="fullImg vid"> 
+                        <source src="${data.photos[3]}" type=video/mp4>
+                    </video>
                 </div>
-                <div class="fullImg">
-                    <img src="${data.photos[3]}" alt="">
-                </div>
-            </div>
-        `
+            `
+            modalContent.insertAdjacentHTML("beforeend", project);
+        }
 
-        modalContent.insertAdjacentHTML("beforeend", project)
     }
 }
-
 //close modal
 span.onclick = function() {
     modal.style.display = "none";
