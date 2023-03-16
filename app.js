@@ -7,20 +7,16 @@ document.addEventListener("mousemove", (e)=>{
             let speed = item.getAttribute("data-speed");
             let positionX = (window.innerWidth - x * speed) / 100;
             let positionY = (window.innerHeight - y * speed) / 100;
-
             item.style.transform = `translateY(${positionY}px) translateX(${positionX}px)`;
         })
-
         document.querySelectorAll(".eye").forEach((item)=>{
             let speed = item.getAttribute("data-speed");
             let positionX = (window.innerWidth - x * speed) / 100;
             let positionY = (window.innerHeight - y * speed) / 100;
-            
-                item.style.transform = `translateY(${positionY - 7}px) translateX(${positionX - 24}px)`;
+            item.style.transform = `translateY(${positionY - 7}px) translateX(${positionX - 24}px)`;
         })
     } 
 })
-
 //header move/scale elements on scroll
 gsap.to(".leftImg", {
     scrollTrigger: {
@@ -28,34 +24,26 @@ gsap.to(".leftImg", {
     },
     x: -1000,
     scale: 2
-
 });
-
 gsap.to(".rightImg", {
     scrollTrigger: {
         scrub: 1
     },
     x: 1000,
     scale: 2
-
 });
-
 gsap.to(".text", {
     scrollTrigger: {
         scrub: 1,
     },
     scale: 1.5
-
 });
-
-
 // falling petals
 let endPath = document.querySelector("#path").getBoundingClientRect().bottom;
 let fallEnd = document.querySelector(".fallEnd").getBoundingClientRect().top;
 let petalaPosition = document.querySelector(".petala2").getBoundingClientRect().top;
-
 //dissapear falling after finish the path
-  window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function() {
     if(window.pageYOffset >= endPath -200 ){
         document.querySelector(".petala").style.display = "none";
         document.querySelector(".petala2").style.display = "none";
@@ -63,9 +51,7 @@ let petalaPosition = document.querySelector(".petala2").getBoundingClientRect().
         document.querySelector(".petala").style.display = "block";
         document.querySelector(".petala2").style.display = "block";
     }
-  });
-  
-
+});
 gsap.to(".petala", {
     motionPath:{
         path: endPath < fallEnd ? "#pathBig" : "#path",
@@ -82,7 +68,6 @@ gsap.to(".petala", {
     ease: "none",
     scale: 2
 });
-
 gsap.to(".petala2", {
     motionPath:{
         path: endPath < fallEnd ? "#path2Big" : "#path2",
@@ -99,7 +84,6 @@ gsap.to(".petala2", {
     ease: "none",
     scale: 2
 });
-
 //change text on header
 const text = document.querySelector(".textChange");
 
@@ -113,15 +97,12 @@ const textLoad = () => {
     setTimeout(textLoad, 8000);
 }
 textLoad();
-
 //scroll home about items into view
 const sliders = document.querySelectorAll(".slide-in");
-
 const appearOptions = {
     threshold: 0,
     rootMargin: "0px 0px -250px 0px"
 };
-
 const appearOnScroll = new IntersectionObserver(function(
     entries,
     appearOnScroll
@@ -138,7 +119,6 @@ const appearOnScroll = new IntersectionObserver(function(
     sliders.forEach(slider => {
         appearOnScroll.observe(slider);
     });
-
 //scroll projects horizontal
 var x = window.matchMedia("(min-width: 801px)")
 function myFunction(x) {
@@ -147,7 +127,6 @@ function myFunction(x) {
         const sections = gsap.utils.toArray(".sticky-wrapper .bigContainer");
         const bigcontainer2 = document.querySelector(".sticky-wrapper2");
         const sections2 = gsap.utils.toArray(".sticky-wrapper2 .bigContainer2");
-        
         let scrollTrigger = gsap.to(sections, {
           xPercent: -100 * (sections.length - 1),
           ease: "none",
@@ -158,7 +137,6 @@ function myFunction(x) {
             end: "+=3000",
           }
         });
-        
         let scrollTrigger2 = gsap.to(sections2, {
           xPercent: -100 * (sections2.length - 1),
           ease: "none",
@@ -169,7 +147,6 @@ function myFunction(x) {
             end: "+=3000",
           }
         }); 
-       
         sections.forEach((section) => {
             let text = section.querySelectorAll(".anim");
             if(text.length === 0)  return 
@@ -203,16 +180,14 @@ function myFunction(x) {
             });
         });
     }
-}
+};
 x.addEventListener('change', myFunction);
 myFunction(x);
-
 //projects detail modal
 var modal = document.getElementById("myModal");
 const modalContent = document.querySelector(".modal-content");
 var btn = document.querySelector(".button");
 var span = document.querySelector(".close");
-
 document.onclick = function(e) {
     if(e.target.classList.contains('button')){
         modal.style.display = "block";
@@ -259,17 +234,16 @@ document.onclick = function(e) {
             `
             modalContent.insertAdjacentHTML("beforeend", project);
         }
-
     }
-}
-//close modal
+};
+//close modal on x
 span.onclick = function() {
     modal.style.display = "none";
     modalContent.innerHTML = '';
-  }
-
-
-
-
-
-
+};
+//when the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+};

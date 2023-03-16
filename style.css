@@ -466,7 +466,7 @@ cursor: pointer;
    flex-direction: column;
 }
 
-.experience{
+.experience, .personal-projects{
     margin-top: 4rem;
 }
 
@@ -475,7 +475,7 @@ cursor: pointer;
 }
 
 .job-period{
-    margin-bottom: 1rem;
+    margin-bottom: 0.65rem;
     color: #4F99A3;
 }
 
